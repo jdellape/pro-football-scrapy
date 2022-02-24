@@ -50,11 +50,10 @@ class StatSpider(scrapy.Spider):
 
             #output to dict format in .json file
             yield {
-                    player_id: {year:{
-                        'adv_pass_stats': parsed_adv_pass,
-                        'adv_rush_rec_stats': parsed_adv_rush_rec
-                    }
-                    }
+                    'player_id':player_id,
+                    'year': year,
+                    'adv_pass_stats': parsed_adv_pass,
+                    'adv_rush_rec_stats': parsed_adv_rush_rec
                 }
         else:
             year = response.url.split("/")[-1]
@@ -63,9 +62,8 @@ class StatSpider(scrapy.Spider):
             reg_pass_table_html = response.xpath('//table[@id="stats"]').extract()[0]
             parsed_reg_pass = get_dataframe_as_dict(reg_pass_table_html)
             yield {
-                    player_id: {year:{
-                        'reg_pass_stats': parsed_reg_pass 
-                    }
-                    }
+                    'player_id': player_id,
+                    'year': year,
+                    'reg_pass_stats': parsed_reg_pass
                 }
     
