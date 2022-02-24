@@ -52,8 +52,9 @@ class StatSpider(scrapy.Spider):
             yield {
                     'player_id':player_id,
                     'year': year,
-                    'adv_pass_stats': parsed_adv_pass,
-                    'adv_rush_rec_stats': parsed_adv_rush_rec
+                    'category': 'advanced',
+                    'pass_table': parsed_adv_pass,
+                    'rush_rec_table': parsed_adv_rush_rec
                 }
         else:
             year = response.url.split("/")[-1]
@@ -64,6 +65,7 @@ class StatSpider(scrapy.Spider):
             yield {
                     'player_id': player_id,
                     'year': year,
-                    'reg_pass_stats': parsed_reg_pass
+                    'category': 'regular',
+                    'pass_table': parsed_reg_pass
                 }
     
