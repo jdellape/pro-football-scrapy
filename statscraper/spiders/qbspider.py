@@ -6,7 +6,9 @@ def get_dataframe_as_dict(response_html):
     #Take raw table html and return as a dictionary
     df = pd.read_html(response_html, header=1)[0]
     df_json_string = df.to_json()
-    return json.loads(df_json_string)
+    json_table = json.loads(df_json_string)
+    dict_list = [{k : list(v.values())} for k, v in json_table.items()]
+    return dict_list
 
 class StatSpider(scrapy.Spider):
     name = 'qb'
